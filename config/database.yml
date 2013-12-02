@@ -1,0 +1,31 @@
+development: &development
+  adapter: postgresql
+  database: test_bdd_development
+  username: root
+  password: root 
+  pool: 5
+  timeout: 5000
+
+test: &test
+  <<: *development
+  database: test_bdd_test
+
+production: &production
+  adapter: postgresql
+  database: test_bdd_production
+  pool: 5
+  timeout: 5000
+
+staging:
+  <<: *production
+  database: test_bdd_staging
+
+integration:
+  <<: *production
+  database: test_bdd_integration
+
+# Matching environments specified in this file will override the above.
+<%= IO.read('config/database.local.yml') if File.exists?('config/database.local.yml') %>
+
+cucumber:
+  <<: *test
