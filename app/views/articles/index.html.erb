@@ -1,0 +1,16 @@
+<% if flash[:notice] %>
+<p class="flash-notice"><%= flash[:notice] %></p>
+<% end %>
+<%- @articles.each do |article| %>
+<h1> Article # <%= article.id %> </h1>
+<div class="article_container" style="margin-bottom: 20px;">
+  Title:
+  <br>
+  <%=h article.title %>
+  <br>
+  Content:
+  <br>
+  <%=h article.content%>
+</div>
+  <% end %>
+<p><%= link_to "New Article", new_article_path %></p>
